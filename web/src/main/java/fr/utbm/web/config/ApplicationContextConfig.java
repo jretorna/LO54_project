@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("fr.utbm")
+@ComponentScan("fr.utbm.web")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
 
