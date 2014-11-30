@@ -5,6 +5,7 @@ import fr.utbm.core.tools.HibernateUtil;
 import org.hibernate.Session;
 
 /**
+ * 
  * Hello world!
  *
  */
