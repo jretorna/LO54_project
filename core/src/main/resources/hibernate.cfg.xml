@@ -2,14 +2,23 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.driver_class">
-            com.mysql.jdbc.Driver
-        </property>
-    <property name="connection.url">jdbc:mysql://localhost:3306/projet</property>
-    <property name="connection.username">projet</property>
-    <property name="connection.password">projet</property>
+  
+<!--     <property name="connection.driver_class">com.mysql.jdbc.Driver</property> -->
+<!--     <property name="connection.url">jdbc:mysql://localhost:3306/java</property> -->
+<!--     <property name="dialect">org.hibernate.dialect.MySQLDialect</property> -->
+  <!--
+    <property name="connection.driver_class">org.postgresql.Driver</property>   
+    <property name="connection.url">jdbc:postgresql://localhost:5432/java</property>
+    <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+  	<property name="default_schema">public</property>-->
+  	
+  	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+	<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/projet</property>
+	<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+	<property name="hibernate.connection.username">root</property>
+	<property name="hibernate.connection.password">root</property>
     <property name="connection.pool_size">10</property>
-    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
     <!-- Enable Hibernate's automatic session context management -->
     <property name="current_session_context_class">thread</property>
     <!-- Disable the second-level cache  -->
@@ -18,8 +27,11 @@
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
     <!-- Drop and re-create the database schema on startup -->
-    <property name="hbm2ddl.auto">create</property>
-    <!-- Object Mapping files -->
-    <mapping resource="fr/utbm/core/entity/user.hbm.xml"/>
+    <property name="hbm2ddl.auto">update</property>
+    <!-- Object Mapping files 
+    <mapping resource="fr/utbm/core/entity/user.hbm.xml"/>-->
+    
+    <mapping class="fr.utbm.core.entity.User"/>
+    
   </session-factory>
 </hibernate-configuration>

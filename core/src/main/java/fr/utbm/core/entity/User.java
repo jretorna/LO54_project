@@ -1,105 +1,69 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.utbm.core.entity;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author java
- */
 @Entity
-@Table(name = "user")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
-    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active")})
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "user_id")
-    private Long userId;
-    @Basic(optional = false)
-    @Column(name = "username")
-    private String username;
-    @Basic(optional = false)
-    @Column(name = "active")
-    private boolean active;
+@Table(name="user")
+public class User implements java.io.Serializable {
+	/*--------------*/
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "user_id")
+	private Long userId;
+	@Column(name = "username")
+	private String userName;
+	@Column(name = "active")
+	private Boolean active;
 
-    public User() {
-    }
+	/*--------------*/
 
-    public User(Long userId) {
-        this.userId = userId;
-    }
+	/**
+	 * Default Constructor
+	 */
+	public User() {
+		// Do nothing
+	}
 
-    public User(Long userId, String username, boolean active) {
-        this.userId = userId;
-        this.username = username;
-        this.active = active;
-    }
+	/**
+	 * Constructor
+	 */
+	public User(final Long userId, final String userName, final Boolean active) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.active = active;
+	}
 
-    public Long getUserId() {
-        return userId;
-    }
+	/*------- Getters & Setters ------*/
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	public Long getUserId() {
+		return userId;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setUserId(final Long userId) {
+		this.userId = userId;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public boolean getActive() {
-        return active;
-    }
+	public void setUserName(final String userName) {
+		this.userName = userName;
+	}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public Boolean getActive() {
+		return active;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (userId != null ? userId.hashCode() : 0);
-        return hash;
-    }
+	public void setActive(final Boolean active) {
+		this.active = active;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "fr.utbm.core.entity.User[ userId=" + userId + " ]";
-    }
-    
 }

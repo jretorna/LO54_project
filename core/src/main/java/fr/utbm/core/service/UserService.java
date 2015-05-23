@@ -1,21 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.utbm.core.service;
 
+import java.util.List;
+
 import fr.utbm.core.entity.User;
-import org.springframework.stereotype.Service;
 
-/**
- *
- * @author 
- */
-@Service
-public class UserService {
-	public void registerUser(User u) {
-		System.out.println(u);
-
-	}
-
+public interface UserService {
+	public void addUser(User user);
+	public void deleteTemperature(User user);
+	
+	public List<User> getUsers();
 }
