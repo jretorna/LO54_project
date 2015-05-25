@@ -8,13 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User implements java.io.Serializable {
 	/*--------------*/
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id", nullable = false)
 	private Long userId;
 	@Column(name = "username")
 	private String userName;
