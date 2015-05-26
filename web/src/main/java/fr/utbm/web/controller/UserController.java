@@ -19,9 +19,9 @@ public class UserController {
     @RequestMapping(value = USER_INFO, method = RequestMethod.GET)
     public @ResponseBody User getUser() {
         User u = new User();
-        u.setEnabled(true);
-        u.setId(1);
-        u.setUsername("test");
+        u.setActive(true);
+        u.setUserId(1l);
+        u.setUserName("test");
         return u;
     }
 }

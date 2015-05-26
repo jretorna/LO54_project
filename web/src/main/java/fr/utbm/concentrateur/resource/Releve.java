@@ -1,4 +1,4 @@
-package fr.utbm.lo54.concentrateur.resource;
+package fr.utbm.concentrateur.resource;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlAttribute;

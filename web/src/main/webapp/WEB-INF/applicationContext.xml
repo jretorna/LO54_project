@@ -20,6 +20,9 @@
 
     <!-- Annotations for service, dao, component, message -->
     <context:component-scan base-package="fr.utbm" />
+    
+    <!-- JAX-RS relevé -->
+    <bean id="collect" class="fr.utbm.concentrateur.rest.SpringCollectBean" scope="session"/>
 
     <!-- JTA activation --> 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
@@ -30,7 +33,7 @@
     </bean>
 
     <!-- Hibernate sessionFactory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan">
             <list>
@@ -49,12 +52,12 @@
     </bean>
 
     <!-- Hibernate transactionManager -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
     <!-- Hibernate template helper -->
-    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 

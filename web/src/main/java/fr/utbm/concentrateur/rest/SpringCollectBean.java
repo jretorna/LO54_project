@@ -1,4 +1,4 @@
-package fr.utbm.lo54.concentrateur.rest;
+package fr.utbm.concentrateur.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
