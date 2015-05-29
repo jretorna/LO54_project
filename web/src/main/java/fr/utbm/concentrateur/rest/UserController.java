@@ -1,4 +1,4 @@
-package fr.utbm.web.controller;
+package fr.utbm.concentrateur.rest;
  
 import java.util.Date;
 import org.springframework.stereotype.Controller;

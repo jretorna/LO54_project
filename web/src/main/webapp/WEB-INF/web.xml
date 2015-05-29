@@ -25,20 +25,21 @@
     <servlet>
 	    <servlet-name>Spring Container</servlet-name>
 	    <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
-	    <load-on-startup>1</load-on-startup>
+	    <load-on-startup>2</load-on-startup>
 	  </servlet>
 	  
 	  <servlet-mapping>
 	    <servlet-name>Spring Container</servlet-name>
-	    <url-pattern>/rest/*</url-pattern>
+	    <url-pattern>/jrest/*</url-pattern>
 	  </servlet-mapping>
   
     <!-- Spring MVC -->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>1</load-on-startup>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>Info</servlet-name>
         <url-pattern>/Info</url-pattern>
@@ -47,7 +48,7 @@
      <!-- Tout ce qui est concentrateur.htm par exemple est envoyé à SpringMVC -->
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>*.htm</url-pattern>
+        <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

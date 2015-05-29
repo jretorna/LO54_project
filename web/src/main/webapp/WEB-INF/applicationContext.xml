@@ -19,7 +19,7 @@
     <context:annotation-config />
 
     <!-- Annotations for service, dao, component, message -->
-    <context:component-scan base-package="fr.utbm" />
+    <context:component-scan base-package="fr.utbm.concentrateur" />
     
     <!-- JAX-RS relevé -->
     <bean id="collect" class="fr.utbm.concentrateur.rest.SpringCollectBean"/>
@@ -63,5 +63,5 @@
 
     <!-- Annotation for Transaction manager -->
     <tx:annotation-driven transaction-manager="transactionManager" />
-      
+    
 </beans>    

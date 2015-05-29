@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/concentrateur")
-public class ApplicationControler {
+public class ApplicationController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showIndex(ModelMap model) {
