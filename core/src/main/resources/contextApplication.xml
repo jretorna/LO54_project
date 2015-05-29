@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 
+ <!-- Area  -->
+ 
+<!--    <bean id="areaController" class="fr.utbm.core.controller.AreaController"> -->
+<!--  			<property name="areas" ref="areaService"/> -->
+<!--  </bean> -->
+ 
+<!--   <bean id="areaService" class="fr.utbm.lo54.concentrateur.services.impl.AreaServiceImpl"> -->
+<!--  			<property name="dao" ref="repository"/> -->
+<!--  </bean> -->
+ 
+ 
+  <!-- User  -->
+  
+     <bean id="userController" class="fr.utbm.core.controller.UserController">
+ 			<property name="users" ref="userService"/>
+ </bean>
+ 
+  <bean id="userService" class="fr.utbm.lo54.concentrateur.services.impl.UserServiceImpl">
+ 			<property name="dao" ref="repository"/>
+ </bean>
+  
+   <!-- Temperature  -->
+   
+<!--       <bean id="temperatureController" class="fr.utbm.core.controller.TemperatureController"> -->
+<!--  			<property name="temperatures" ref="temperatureService"/> -->
+<!--  </bean> -->
+ 
+<!--   <bean id="temperatureService" class="fr.utbm.lo54.concentrateur.services.impl.TemperatureServiceImpl"> -->
+<!--  			<property name="dao" ref="repository"/> -->
+<!--  </bean> -->
+   
+    <!-- Station  -->
+    
+<!--        <bean id="stationController" class="fr.utbm.core.controller.StationController"> -->
+<!--  			<property name="stations" ref="stationService"/> -->
+<!--  </bean> -->
+ 
+<!--   <bean id="stationService" class="fr.utbm.lo54.concentrateur.services.impl.StationServiceImpl"> -->
+<!--  			<property name="dao" ref="repository"/> -->
+<!--  </bean> -->
+    
+     <!-- Sensor  -->
+ 
+<!--    <bean id="sensorController" class="fr.utbm.core.controller.SensorController"> -->
+<!--  			<property name="sensors" ref="sensorService"/> -->
+<!--  </bean> -->
+ 
+<!--   <bean id="sensorService" class="fr.utbm.lo54.concentrateur.services.impl.SensorServiceImpl"> -->
+<!--  			<property name="dao" ref="repository"/> -->
+<!--  </bean> -->
+ 
+  <bean id="repository" class="fr.utbm.core.dao.RegisterDao">
+  </bean>
+  
+ </beans>
