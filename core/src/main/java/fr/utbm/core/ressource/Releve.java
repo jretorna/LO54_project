@@ -1,7 +1,7 @@
-package fr.utbm.concentrateur.resource;
+package fr.utbm.core.ressource;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -9,6 +9,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Releve {
 	String areaName;
 	int areaId;
+	
+	private int staId;
+	private String staLabel;
 	
 	String sensorName;
 	int sensorId;
@@ -34,6 +37,24 @@ public class Releve {
 	}
 
 	
+	public int getStaId() {
+		return staId;
+	}
+	
+	@XmlElement
+	public void setStaId(int staId) {
+		this.staId = staId;
+	}
+
+	public String getStaLabel() {
+		return staLabel;
+	}
+
+	@XmlElement
+	public void setStaLabel(String staLabel) {
+		this.staLabel = staLabel;
+	}
+
 	public String getSensorName() {
 		return sensorName;
 	}

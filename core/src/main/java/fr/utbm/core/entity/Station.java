@@ -1,6 +1,5 @@
 package fr.utbm.core.entity;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,7 +21,7 @@ public class Station implements java.io.Serializable {
 	/*--------------*/
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Sta_Id")
 	private int staId;
 	@Column(name = "Sta_Label")
@@ -30,8 +30,8 @@ public class Station implements java.io.Serializable {
 	private Date staLastCom;
 	@Column(name = "Sta_Valid")
 	private boolean stavalide;
-	/*@OneToMany(mappedBy = "station", targetEntity = Sensor.class, fetch=FetchType.LAZY)
-	private List<Sensor> sensors;*/
+	@OneToMany(mappedBy = "station", targetEntity = Sensor.class, fetch=FetchType.LAZY)
+	private List<Sensor> sensors;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "Are_Id", referencedColumnName = "Are_Id")
 	private Area area;

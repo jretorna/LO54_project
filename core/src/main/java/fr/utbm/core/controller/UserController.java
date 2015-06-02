@@ -1,19 +1,19 @@
 package fr.utbm.core.controller;
 
 import fr.utbm.core.entity.User;
-import fr.utbm.core.service.UserService;
+import fr.utbm.core.service.IUserService;
 
 public class UserController implements UserControllerInterface {
 
 	/*----------------------*/
-	private UserService users;
+	private IUserService users;
 	/*----------------------*/
 
-	public UserService getUsers() {
+	public IUserService getUsers() {
 		return users;
 	}
 
-	public void setUsers(final UserService users) {
+	public void setUsers(final IUserService users) {
 		this.users = users;
 	}
 

@@ -9,7 +9,7 @@ import java.util.Date;
  * @date 25 mai 2015<br>
  *
  */
-public class Releve {
+public class Releve1 {
 
 	/*----------------------*/
 	private long areaId;
@@ -20,11 +20,11 @@ public class Releve {
 	private Date date;
 	/*----------------------*/
 
-	public Releve() {
+	public Releve1() {
 		super();
 	}
 
-	public Releve(	final long areaId,
+	public Releve1(	final long areaId,
 					final String areaName,
 					final long sensorId,
 					final String sensorName,
@@ -89,7 +89,7 @@ public class Releve {
 		this.date = date;
 	}
 
-	public Releve getReleve() {
+	public Releve1 getReleve() {
 		return this;
 	}
 }

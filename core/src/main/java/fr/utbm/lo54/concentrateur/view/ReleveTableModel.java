@@ -18,7 +18,7 @@ public class ReleveTableModel extends AbstractTableModel {
 	private final String[] entetes = {"areaId", "areaName", "sensorId",
 			"sensorName", "temperature"};
 	private ReleveService releveService;
-	private List<Releve> mapReleve;
+	private List<Releve1> mapReleve;
 	/*------------------*/
 
 	public ReleveTableModel() {
@@ -26,7 +26,7 @@ public class ReleveTableModel extends AbstractTableModel {
 		mapReleve = releveService.findLastReleve();
 	}
 
-	public List<Releve> getReleves() {
+	public List<Releve1> getReleves() {
 		return mapReleve;
 	}
 

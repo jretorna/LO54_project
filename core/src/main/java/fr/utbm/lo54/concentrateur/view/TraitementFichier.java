@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TraitementFichier {
 
-	public void save(final Releve _rel) {
+	public void save(final Releve1 _rel) {
 		FileWriter writer;
 		try {
 			String file = "C:\\Users\\Jeremy\\Documents\\releve.txt";
@@ -42,15 +42,15 @@ public class TraitementFichier {
 		}
 	}
 
-	public List<Releve> read(final String _file) {
-		List<Releve> releveList = new ArrayList<Releve>();
+	public List<Releve1> read(final String _file) {
+		List<Releve1> releveList = new ArrayList<Releve1>();
 		try {
 			InputStream ips = new FileInputStream(_file);
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
 			String ligne;
 			while ((ligne = br.readLine()) != null) {
-				Releve rel = new Releve();
+				Releve1 rel = new Releve1();
 				if (releveList != null) {
 					String[] tabChaine = ligne.split(";");
 					rel.setAreaId(Integer.parseInt(tabChaine[0]));

@@ -13,7 +13,7 @@ import java.util.List;
 public class ReleveService {
 	/*-------------------------*/
 	private static ReleveService instance;
-	private List<Releve> mapReleve;
+	private List<Releve1> mapReleve;
 	/*-------------------------*/
 
 	private ReleveService() {
@@ -27,7 +27,7 @@ public class ReleveService {
 		return instance;
 	}
 
-	public synchronized List<Releve> findLastReleve() {
+	public synchronized List<Releve1> findLastReleve() {
 		chargerDatas();
 		return mapReleve;
 	}
@@ -41,7 +41,7 @@ public class ReleveService {
 
 		/* ------ TESTS ------- */
 		if (mapReleve == null) {
-			mapReleve = new ArrayList<Releve>();
+			mapReleve = new ArrayList<Releve1>();
 		}
 
 		Runnable run1 = new Runnable() {
@@ -49,7 +49,7 @@ public class ReleveService {
 			public void run() {
 				int i = 1;
 				Float temp = 50.0f;
-				Releve rel1 = new Releve();
+				Releve1 rel1 = new Releve1();
 				while (true) {
 					rel1.setAreaId(i);
 					rel1.setAreaName("Super");
@@ -74,7 +74,7 @@ public class ReleveService {
 				}
 			}
 		};
-		new Thread(run1, "lancement ajout Releve").start();
+		new Thread(run1, "lancement ajout Releve1").start();
 		/*----------------------------*/
 	}
 }

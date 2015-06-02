@@ -4,14 +4,16 @@
  */
 package fr.utbm.core.dao;
 
+import org.springframework.stereotype.Service;
+
 import fr.utbm.core.entity.User;
 
 /**
  *
  * @author 
  */
-public class UserDao {
-	public void registerUser(User u) {
-		System.out.println(u);
-	}
+
+@Service
+public class UserDao extends DaoCRUD<User, Integer> {
+	
 }

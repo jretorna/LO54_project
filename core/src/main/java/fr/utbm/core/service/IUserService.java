@@ -4,7 +4,7 @@ import java.util.List;
 
 import fr.utbm.core.entity.User;
 
-public interface UserService {
+public interface IUserService {
 	public void addUser(User user);
 	public void deleteTemperature(User user);
 	
