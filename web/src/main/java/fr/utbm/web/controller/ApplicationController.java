@@ -1,6 +1,7 @@
 package fr.utbm.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import fr.utbm.core.entity.User;
 import fr.utbm.core.ressource.Releve;
 import fr.utbm.core.service.IReleveService;
 import fr.utbm.core.service.IUserService;
@@ -20,16 +20,16 @@ import fr.utbm.core.service.IUserService;
 @RequestMapping("/concentrateur")
 public class ApplicationController {
 	
-	private IUserService iUserService;
+	private IUserService userService;
 	private IReleveService releveService;
 	
 	public IUserService getUserService() {
-		return iUserService;
+		return userService;
 	}
 	
 	@Autowired
 	public void setUserService(IUserService iUserService) {
-		this.iUserService = iUserService;
+		this.userService = iUserService;
 	}
 
 	public IReleveService getReleveService() {
@@ -56,18 +56,22 @@ public class ApplicationController {
 	@RequestMapping(value="adduser", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
 		
-		User user = new User();
+		/*User user = new User();
 		
 		user.setUserName("Neakapppcpra");
 		user.setActive(true);
 
 		System.out.println("deb add");
 
-		iUserService.addUser(user);
+		userService.addUser(user);
 
-		System.out.println("Add cools");
+		System.out.println("Add cools");*/
 		
-		model.addAttribute("message", "Ajout d'un utilisateur");
+		List<Releve> releves = releveService.listReleve(); 
+		
+		model.addAttribute("message", "Ajout d'un utilisateur "+releves.get(0).toString());
+		model.addAttribute("releves", releves);
+		
 		return "affichage";
 	}
 	

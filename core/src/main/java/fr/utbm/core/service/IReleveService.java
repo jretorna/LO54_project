@@ -1,5 +1,7 @@
 package fr.utbm.core.service;
 
+import java.util.List;
+
 import fr.utbm.core.entity.Area;
 import fr.utbm.core.entity.Sensor;
 import fr.utbm.core.entity.Station;
@@ -17,6 +19,7 @@ public interface IReleveService {
 	public void deleteTemperature(Temperature temp);
 	
 	public void registerReleve(Releve releve);
+	public List<Releve> listReleve();
 	
 	public String saveFile(byte[] fileBytes);
 	public Releve jaxbGet(String releveXmlFileFullName);

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.utbm.core.dao.IDaoCRUD;
+import fr.utbm.core.dao.TemperatureDao;
 import fr.utbm.core.entity.Area;
 import fr.utbm.core.entity.Sensor;
 import fr.utbm.core.entity.Station;
@@ -28,7 +30,7 @@ public class ReleveService implements IReleveService {
 	
 	private IDaoCRUD<Station, Integer> daoStation;
 	private IDaoCRUD<Area, Integer> daoArea;
-	private IDaoCRUD<Temperature, Integer> daoTemperature;
+	private TemperatureDao daoTemperature;
 	private IDaoCRUD<Sensor, Integer> daoSensor;
 
 	/**
@@ -68,7 +70,7 @@ public class ReleveService implements IReleveService {
 	}
 
 	@Autowired
-	public void setDaoTemperature(IDaoCRUD<Temperature, Integer> daoTemperature) {
+	public void setDaoTemperature(TemperatureDao  daoTemperature) {
 		this.daoTemperature = daoTemperature;
 	}
 	
@@ -243,6 +245,12 @@ public class ReleveService implements IReleveService {
 		daoTemperature.register(temp);
 		
 		
+	}
+
+	@Override
+	public List<Releve> listReleve() {
+		// TODO Auto-generated method stub
+		return daoTemperature.listFullTemperatureCollect();
 	}
 
 	
