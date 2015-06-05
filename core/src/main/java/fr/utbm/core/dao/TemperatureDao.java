@@ -8,21 +8,29 @@ import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
 
 import fr.utbm.core.entity.Temperature;
-import fr.utbm.core.ressource.Releve;
+import fr.utbm.core.ressource.ReleveQueryResult;
 
 @Service
 public class TemperatureDao extends DaoCRUD<Temperature, Integer> {
 	
 	@SuppressWarnings("unchecked")
-	public List<Releve> listFullTemperatureCollect() {
+	public List<ReleveQueryResult> listFullTemperatureCollect() {
 		
-		List<Releve> listReleve = null;
+		List<ReleveQueryResult> listReleve = null;
 		
 		Session session = this.getSessionFactory().openSession();
 		
 		try {
 			
 			session.beginTransaction();
+			
+			/*listReleve = session.createQuery("Select "
+					+ "	area.areId "
+					+ " from Temperature temperature "
+					+ "	inner join temperature.sensor as sensor"
+					+ "	inner join sensor.station as station"
+					+ "	inner join station.area as area").setResultTransformer(Transformers.aliasToBean(ReleveQueryResult.class)).list();
+			*/
 			
 			listReleve = session.createQuery("Select "
 					+ "	are.areLabel as areaName,  are.areId as areaId,"
@@ -32,7 +40,7 @@ public class TemperatureDao extends DaoCRUD<Temperature, Integer> {
 					+ " from Temperature temp "
 					+ "	inner join temp.sensor as sen"
 					+ "	inner join sen.station as sta"
-					+ "	inner join sta.area as are").setResultTransformer(Transformers.aliasToBean(Releve.class)).list();
+					+ "	inner join sta.area as are").setResultTransformer(Transformers.aliasToBean(ReleveQueryResult.class)).list();
 			
 			
 			session.getTransaction().commit();

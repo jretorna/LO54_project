@@ -13,9 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.sun.xml.txw2.annotation.XmlElement;
 
 @Entity
 @Table(name="station")
+@XmlRootElement
 public class Station implements java.io.Serializable {
 
 	/*--------------*/
@@ -71,7 +75,8 @@ public class Station implements java.io.Serializable {
 	public int getStaId() {
 		return staId;
 	}
-
+	
+	@XmlElement
 	public void setStaId(final int staId) {
 		this.staId = staId;
 	}
@@ -80,6 +85,7 @@ public class Station implements java.io.Serializable {
 		return staLabel;
 	}
 
+	@XmlElement
 	public void setStaLabel(final String staLabel) {
 		this.staLabel = staLabel;
 	}
@@ -88,6 +94,7 @@ public class Station implements java.io.Serializable {
 		return staLastCom;
 	}
 
+	@XmlElement
 	public void setStaLastCom(final Date staLastCom) {
 		this.staLastCom = staLastCom;
 	}
@@ -96,6 +103,7 @@ public class Station implements java.io.Serializable {
 		return stavalide;
 	}
 
+	@XmlElement
 	public void setStavalide(final boolean stavalide) {
 		this.stavalide = stavalide;
 	}
@@ -111,7 +119,8 @@ public class Station implements java.io.Serializable {
 	public Area getArea() {
 		return area;
 	}
-
+	
+	@XmlElement
 	public void setArea(final Area area) {
 		this.area = area;
 	}

@@ -23,6 +23,7 @@ import fr.utbm.core.entity.Sensor;
 import fr.utbm.core.entity.Station;
 import fr.utbm.core.entity.Temperature;
 import fr.utbm.core.ressource.Releve;
+import fr.utbm.core.ressource.ReleveQueryResult;
 import fr.utbm.core.service.IReleveService;
 
 @Service
@@ -203,42 +204,41 @@ public class ReleveService implements IReleveService {
 
 	@Override
 	public void registerReleve(Releve releve) {
-		Area area = daoArea.get(Area.class, releve.getAreaId());
+		
+		
+		Area area = daoArea.get(Area.class, releve.getArea().getAreId());
+		
 		if(area == null) {
-			area = new Area();
-			area.setAreLabel(releve.getAreaName());
-			area.setAreRoad("");
+			area = releve.getArea();
 			
 			daoArea.register(area);
 		}
 		
-		Station station = daoStation.get(Station.class, releve.getStaId());
+		Station station = daoStation.get(Station.class, releve.getStation().getStaId());
 		
 		if(station == null) {
 			
-			station = new Station();
+			station = releve.getStation();
 			
-			station.setStaLabel(releve.getStaLabel());
 			station.setArea(area);
 			
 			daoStation.register(station);
 		}
 		
-		Sensor sensor = daoSensor.get(Sensor.class, releve.getSensorId());
+		Sensor sensor = daoSensor.get(Sensor.class, releve.getSensor().getSenId());
 		
 		if(sensor == null) {
 			
-			sensor = new Sensor();
+			sensor = releve.getSensor();
 			
-			sensor.setSenLabel(releve.getSensorName());
 			sensor.setStation(station);
 			
 			daoSensor.register(sensor);
 			
 		}
 		
-		Temperature temp = new Temperature();
-		temp.setTmpValue(releve.getTempVal());
+		Temperature temp = releve.getTemperature();
+		
 		temp.setTmpDate(new Date());
 		temp.setSensor(sensor);
 		
@@ -248,7 +248,7 @@ public class ReleveService implements IReleveService {
 	}
 
 	@Override
-	public List<Releve> listReleve() {
+	public List<ReleveQueryResult> listReleve() {
 		// TODO Auto-generated method stub
 		return daoTemperature.listFullTemperatureCollect();
 	}

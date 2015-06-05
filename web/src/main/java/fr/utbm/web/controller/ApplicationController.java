@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.utbm.core.ressource.Releve;
+import fr.utbm.core.ressource.ReleveQueryResult;
 import fr.utbm.core.service.IReleveService;
 import fr.utbm.core.service.IUserService;
 
@@ -67,7 +68,7 @@ public class ApplicationController {
 
 		System.out.println("Add cools");*/
 		
-		List<Releve> releves = releveService.listReleve(); 
+		List<ReleveQueryResult> releves = releveService.listReleve(); 
 		
 		model.addAttribute("message", "Ajout d'un utilisateur "+releves.get(0).toString());
 		model.addAttribute("releves", releves);

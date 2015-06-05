@@ -24,10 +24,10 @@
 		</tr>
 		<c:forEach items="${releves}" var="releve">
 			<tr>
-				<td><c:out value="${releve.areaName}" /></td>
-				<td><c:out value="${releve.staLabel}" /></td>
-				<td><c:out value="${releve.sensorName}" /></td>
-				<td><c:out value="${releve.tempVal}" /></td>
+				<td><c:out value="${releve.getAreaName()}" /></td>
+				<td><c:out value="${releve.getStaLabel()}" /></td>
+				<td><c:out value="${releve.getSensorName()}" /></td>
+				<td><c:out value="${releve.getTempVal()}" /></td>
 			</tr>
 		</c:forEach>
 		

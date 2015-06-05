@@ -1,13 +1,61 @@
 package fr.utbm.core.ressource;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import fr.utbm.core.entity.Area;
+import fr.utbm.core.entity.Sensor;
+import fr.utbm.core.entity.Station;
+import fr.utbm.core.entity.Temperature;
 
 
 @XmlRootElement
 public class Releve {
-	String areaName;
+	
+	private Area area;
+	private Station station;
+	private Sensor sensor;
+	private Temperature temperature;
+	
+	
+	public Area getArea() {
+		return area;
+	}
+	
+	@XmlElement
+	public void setArea(Area area) {
+		this.area = area;
+	}
+	
+	public Station getStation() {
+		return station;
+	}
+	
+	@XmlElement
+	public void setStation(Station station) {
+		this.station = station;
+	}
+	
+	public Sensor getSensor() {
+		return sensor;
+	}
+	
+	@XmlElement
+	public void setSensor(Sensor sensor) {
+		this.sensor = sensor;
+	}
+	
+	
+	public Temperature getTemperature() {
+		return temperature;
+	}
+	
+	@XmlElement
+	public void setTemperature(Temperature temperature) {
+		this.temperature = temperature;
+	}
+	
+	/*String areaName;
 	int areaId;
 	
 	private int staId;
@@ -89,7 +137,7 @@ public class Releve {
 				+ ", tempVal=" + tempVal + "]";
 	}
 	
-	
+	*/
 	
 	
 }

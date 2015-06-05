@@ -12,9 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.sun.xml.txw2.annotation.XmlElement;
 
 @Entity
 @Table(name="sensor")
+@XmlRootElement
 public class Sensor implements java.io.Serializable {
 
 	/*--------------*/
@@ -55,7 +59,8 @@ public class Sensor implements java.io.Serializable {
 	public int getSenId() {
 		return senId;
 	}
-
+	
+	@XmlElement
 	public void setSenId(final int senId) {
 		this.senId = senId;
 	}
@@ -64,6 +69,7 @@ public class Sensor implements java.io.Serializable {
 		return senLabel;
 	}
 
+	@XmlElement
 	public void setSenLabel(final String senLabel) {
 		this.senLabel = senLabel;
 	}
@@ -71,18 +77,19 @@ public class Sensor implements java.io.Serializable {
 	public Station getStation() {
 		return station;
 	}
-
+	
+	@XmlElement
 	public void setStation(final Station station) {
 		this.station = station;
 	}
 
-	/*
-	public Collection<Temperature> getTemperatures() {
+	public List<Temperature> getTemperatures() {
 		return temperatures;
 	}
 
-	public void setTemperatures(final List<Temperature> temperatures) {
+	public void setTemperatures(List<Temperature> temperatures) {
 		this.temperatures = temperatures;
-	}*/
+	}
+
 
 }

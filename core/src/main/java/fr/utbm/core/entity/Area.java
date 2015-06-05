@@ -10,9 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.sun.xml.txw2.annotation.XmlElement;
 
 @Entity
 @Table(name="area")
+@XmlRootElement
 public class Area implements java.io.Serializable {
 
 	/*--------------*/
@@ -53,7 +57,8 @@ public class Area implements java.io.Serializable {
 	public int getAreId() {
 		return areId;
 	}
-
+	
+	@XmlElement
 	public void setAreId(final int areId) {
 		this.areId = areId;
 	}
@@ -62,6 +67,7 @@ public class Area implements java.io.Serializable {
 		return areLabel;
 	}
 
+	@XmlElement
 	public void setAreLabel(final String areLabel) {
 		this.areLabel = areLabel;
 	}
@@ -70,6 +76,7 @@ public class Area implements java.io.Serializable {
 		return areRoad;
 	}
 
+	@XmlElement
 	public void setAreRoad(final String areRoad) {
 		this.areRoad = areRoad;
 	}

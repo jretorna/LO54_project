@@ -11,9 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.sun.xml.txw2.annotation.XmlElement;
 
 @Entity
 @Table(name="temperature")
+@XmlRootElement
 public class Temperature implements java.io.Serializable {
 	/*--------------*/
 	private static final long serialVersionUID = 1L;
@@ -56,7 +60,8 @@ public class Temperature implements java.io.Serializable {
 	public int getTmpId() {
 		return tmpId;
 	}
-
+	
+	@XmlElement
 	public void setTmpId(final int tmpId) {
 		this.tmpId = tmpId;
 	}
@@ -65,6 +70,7 @@ public class Temperature implements java.io.Serializable {
 		return tmpValue;
 	}
 
+	@XmlElement
 	public void setTmpValue(final Float tmpValue) {
 		this.tmpValue = tmpValue;
 	}
@@ -73,6 +79,7 @@ public class Temperature implements java.io.Serializable {
 		return tmpDate;
 	}
 
+	@XmlElement
 	public void setTmpDate(final Date tmpDate) {
 		this.tmpDate = tmpDate;
 	}
@@ -81,6 +88,7 @@ public class Temperature implements java.io.Serializable {
 		return sensor;
 	}
 
+	@XmlElement
 	public void setSensor(final Sensor sensor) {
 		this.sensor = sensor;
 	}
