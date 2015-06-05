@@ -1,11 +1,7 @@
 package fr.utbm.core;
 
-import fr.utbm.core.entity.Area;
-import fr.utbm.core.entity.Sensor;
-import fr.utbm.core.entity.Station;
-import fr.utbm.core.entity.Temperature;
-import fr.utbm.core.ressource.Releve;
-import fr.utbm.core.service.impl.ReleveService;
+import fr.utbm.core.ressource.ReleveParameter;
+import fr.utbm.core.service.impl.Jaxb;
 
 public class ClientTest {
 
@@ -25,7 +21,7 @@ public class ClientTest {
 
 		System.out.println("Add cools");*/
 		
-		ReleveService releveService = new ReleveService();
+		/*ReleveService releveService = new ReleveService();
 		
 		Releve releve = new Releve();
 		
@@ -52,7 +48,18 @@ public class ClientTest {
 		releve.setTemperature(temp);
 		
 		
-		System.out.println(releveService.jaxbSerialiseReleve(releve, "/Users/mac/Desktop"));
+		System.out.println(releveService.jaxbSerialiseReleve(releve, "/Users/mac/Desktop"));*/
+		
+		Jaxb<ReleveParameter> jaxbparam = new Jaxb<ReleveParameter>();
+		ReleveParameter param = new ReleveParameter();
+		
+		param.setTempMin(-100);
+		param.setTempMax(70);
+		
+		System.out.println(jaxbparam.jaxbSerialiseObject(param, ReleveParameter.class, "/Users/mac/Desktop", "param"));
+		
+		
+		
 
 	}
 

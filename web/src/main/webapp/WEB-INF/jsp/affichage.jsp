@@ -15,13 +15,17 @@
 	<ul>
 		
 	</ul>
+	<h1><c:out value="${view}" /></h1>
 	<table>
-		<tr>
-			<th>Area</th>
-			<th>Station</th>
-			<th>Sensor</th>
-			<th>Temperature</th>
-		</tr>
+	<tr>
+		<th>Area</th>
+		<th>Station</th>
+		<th>Sensor</th>
+		<th>Temperature</th>
+	</tr>
+	
+	<c:if test="${view == 1 }">
+		
 		<c:forEach items="${releves}" var="releve">
 			<tr>
 				<td><c:out value="${releve.getAreaName()}" /></td>
@@ -30,7 +34,21 @@
 				<td><c:out value="${releve.getTempVal()}" /></td>
 			</tr>
 		</c:forEach>
-		
+	
+	</c:if>
+	
+	<c:if test="${view == 2}">
+		<c:forEach items="${releves}" var="releve">
+			<tr>
+				<td><c:out value="${releve.getArea().getAreId()}" /></td>
+				<%-- <td><c:out value="${releve.getStaLabel()}" /></td>
+				<td><c:out value="${releve.getSensorName()}" /></td>
+				<td><c:out value="${releve.getTempVal()}" /></td> --%>
+			</tr>
+		</c:forEach>
+	</c:if>
+	
 	</table>
+	
 </body>
 </html>

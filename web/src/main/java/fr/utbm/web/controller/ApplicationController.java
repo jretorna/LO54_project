@@ -1,6 +1,8 @@
 package fr.utbm.web.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,7 @@ public class ApplicationController {
 	}
 	
 	
-	@RequestMapping(value="adduser", method = RequestMethod.GET)
+	@RequestMapping(value="lastreleves", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
 		
 		/*User user = new User();
@@ -70,7 +72,42 @@ public class ApplicationController {
 		
 		List<ReleveQueryResult> releves = releveService.listReleve(); 
 		
-		model.addAttribute("message", "Ajout d'un utilisateur "+releves.get(0).toString());
+		model.addAttribute("message", "Liste des températures collectées");
+		model.addAttribute("view", 1);
+		model.addAttribute("releves", releves);
+		
+		return "affichage";
+	}
+	
+	@RequestMapping(value="badreleves", method = RequestMethod.GET)
+	public String listOutReleves(ModelMap model) {
+		
+		
+		
+		List<Releve> releves = new ArrayList<Releve>();
+		
+		String rootPath = System.getProperty("catalina.home");
+		
+		File dir = new File(rootPath+File.separator+"relevesOut");
+		
+		String ext;
+	
+		
+		if ( dir.isDirectory ( ) ) {
+			File[] files = dir.listFiles();
+			
+			for(int i=0; i<files.length; i++) {
+				ext = files[i].getAbsolutePath().substring(files[i].getAbsolutePath().lastIndexOf("."));
+				model.addAttribute("message", "Liste des releves out "+ext);
+				if(ext.equals(".xml"))
+					releves.add(releveService.jaxbGet(files[i].getAbsolutePath()));
+			}
+			
+		}
+		
+		
+		//model.addAttribute("message", "Liste des releves out "+releves.size());
+		model.addAttribute("view", 2);
 		model.addAttribute("releves", releves);
 		
 		return "affichage";

@@ -8,11 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +18,7 @@ import fr.utbm.core.entity.Sensor;
 import fr.utbm.core.entity.Station;
 import fr.utbm.core.entity.Temperature;
 import fr.utbm.core.ressource.Releve;
+import fr.utbm.core.ressource.ReleveParameter;
 import fr.utbm.core.ressource.ReleveQueryResult;
 import fr.utbm.core.service.IReleveService;
 
@@ -33,6 +29,27 @@ public class ReleveService implements IReleveService {
 	private IDaoCRUD<Area, Integer> daoArea;
 	private TemperatureDao daoTemperature;
 	private IDaoCRUD<Sensor, Integer> daoSensor;
+	private IJaxb<Releve> jaxbService;
+	private IJaxb<ReleveParameter> jaxbParamService;
+	
+
+	public IJaxb<ReleveParameter> getJaxbParamService() {
+		return jaxbParamService;
+	}
+
+	@Autowired
+	public void setJaxbParamService(IJaxb<ReleveParameter> jaxbParamService) {
+		this.jaxbParamService = jaxbParamService;
+	}
+
+	public IJaxb<Releve> getJaxbService() {
+		return jaxbService;
+	}
+
+	@Autowired
+	public void setJaxbService(IJaxb<Releve> jaxbService) {
+		this.jaxbService = jaxbService;
+	}
 
 	/**
 	 * Getters setter daoStation
@@ -133,8 +150,6 @@ public class ReleveService implements IReleveService {
            DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd HH_mm_ss");
      	   //get current date time with Date()
      	   Date date = new Date();
-     	   System.out.println();
-
             // Create the file on server
      	    String name = "releve_"+dateFormat.format(date)+".xml";
      	    
@@ -155,94 +170,60 @@ public class ReleveService implements IReleveService {
         }
 	}
 	
-	public Releve jaxbGet(String releveXmlFileFullName) {
-		
-		try {
-			 
-			File file = new File(releveXmlFileFullName);
-			JAXBContext jaxbContext = JAXBContext.newInstance(Releve.class);
-	 
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			
-			return (Releve) jaxbUnmarshaller.unmarshal(file);
-			
-	 
-		  } catch (JAXBException e) {
-			e.printStackTrace();
-		  }
-		
-		return null;
-	 
-	}
 	
-	public String jaxbSerialiseReleve(Releve releve, String rootPath) {
-		
-		try {
-			 
-			File dir = new File(rootPath + File.separator + "releves");
-			if (!dir.exists())
-                dir.mkdirs();
-			
-			File file = new File(dir.getAbsolutePath()+ File.separator + "releve.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Releve.class);
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-	 
-			// output pretty printed
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-	 
-			jaxbMarshaller.marshal(releve, file);
-			
-			return file.getAbsolutePath();
-	 
-	      } catch (JAXBException e) {
-	    	  e.printStackTrace();
-	      }
-		
-		return "";
-		
-	}
 
 	@Override
 	public void registerReleve(Releve releve) {
 		
 		
-		Area area = daoArea.get(Area.class, releve.getArea().getAreId());
+		String rootPath = System.getProperty("catalina.home");
 		
-		if(area == null) {
-			area = releve.getArea();
-			
-			daoArea.register(area);
-		}
-		
-		Station station = daoStation.get(Station.class, releve.getStation().getStaId());
-		
-		if(station == null) {
-			
-			station = releve.getStation();
-			
-			station.setArea(area);
-			
-			daoStation.register(station);
-		}
-		
-		Sensor sensor = daoSensor.get(Sensor.class, releve.getSensor().getSenId());
-		
-		if(sensor == null) {
-			
-			sensor = releve.getSensor();
-			
-			sensor.setStation(station);
-			
-			daoSensor.register(sensor);
-			
-		}
+		ReleveParameter param = jaxbParamService.jaxbGet(rootPath+File.separator+"param/param.xml", ReleveParameter.class);
 		
 		Temperature temp = releve.getTemperature();
 		
-		temp.setTmpDate(new Date());
-		temp.setSensor(sensor);
+		if(temp.getTmpValue() <param.getTempMin() || temp.getTmpValue() > param.getTempMax()) {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd HH_mm_ss");
+			jaxbService.jaxbSerialiseObject(releve, Releve.class, rootPath+File.separator+"relevesOut", "releve"+dateFormat.format(new Date()));
+		} else {
 		
-		daoTemperature.register(temp);
+			Area area = daoArea.get(Area.class, releve.getArea().getAreId());
+			
+			if(area == null) {
+				area = releve.getArea();
+				
+				daoArea.register(area);
+			}
+			
+			Station station = daoStation.get(Station.class, releve.getStation().getStaId());
+			
+			if(station == null) {
+				
+				station = releve.getStation();
+				
+				station.setArea(area);
+				
+				daoStation.register(station);
+			}
+			
+			Sensor sensor = daoSensor.get(Sensor.class, releve.getSensor().getSenId());
+			
+			if(sensor == null) {
+				
+				sensor = releve.getSensor();
+				
+				sensor.setStation(station);
+				
+				daoSensor.register(sensor);
+				
+			}
+			
+			temp.setTmpDate(new Date());
+			temp.setSensor(sensor);
+			
+			daoTemperature.register(temp);
+			
+		}
 		
 		
 	}
@@ -251,6 +232,19 @@ public class ReleveService implements IReleveService {
 	public List<ReleveQueryResult> listReleve() {
 		// TODO Auto-generated method stub
 		return daoTemperature.listFullTemperatureCollect();
+	}
+
+	@Override
+	public Releve jaxbGet(String releveXmlFileFullName) {
+		
+		return jaxbService.jaxbGet(releveXmlFileFullName, Releve.class);
+	}
+
+	@Override
+	public String jaxbSerialiseReleve(Releve releve, String rootPath) {
+		// TODO Auto-generated method stub
+		return jaxbService.jaxbSerialiseObject(releve, Releve.class, rootPath + File.separator + "releves", "releve");
+		
 	}
 
 	
