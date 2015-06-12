@@ -1,0 +1,48 @@
+#filter, #parameter {
+margin-left:50px;
+padding-left:15px;
+	padding-right:15px;
+	background-color: #F2F2F2; /* gris */
+	padding-bottom :10px;
+	padding-top : -10px;
+	 border-width:1px;
+ border-style:dotted;
+ border-color:black;
+}
+
+#filter{
+	float :left;
+	width: 35%;
+}
+
+#parameter{
+	margin-left : 45%;
+	width : 250px;
+}
+
+#configuration{
+margin-bottom : 110px;
+}
+
+#releveTab{
+position : center;
+margin-left:50px;
+}
+
+#tableReleve{
+border-collapse: collapse;
+width:50%;
+}
+
+#t, th{
+ border-width:1px;
+ border-style:solid; 
+ border-color:black;
+ width:100px;
+ text-align:center;
+ vertical-align:middle;
+}
+
+th{
+background-color:#F2F2F2; /* gris */
+}

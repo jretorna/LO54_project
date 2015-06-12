@@ -25,6 +25,8 @@ import fr.utbm.core.service.IReleveService;
 @Service
 public class ReleveService implements IReleveService {
 	
+	private static String rootPathParam = "/Users/mac/Desktop";
+	
 	private IDaoCRUD<Station, Integer> daoStation;
 	private IDaoCRUD<Area, Integer> daoArea;
 	private TemperatureDao daoTemperature;
@@ -233,6 +235,16 @@ public class ReleveService implements IReleveService {
 		// TODO Auto-generated method stub
 		return daoTemperature.listFullTemperatureCollect();
 	}
+	
+	
+
+	@Override
+	public List<ReleveQueryResult> listReleveByFilter(Float flt_min,
+			Float flt_max, String date_deb, String date_fin, String station,
+			String area, String capteur) {
+		// TODO Auto-generated method stub
+		return daoTemperature.listTemperatureByFilter(flt_min, flt_max, date_deb, date_fin, station, area, capteur);
+	}
 
 	@Override
 	public Releve jaxbGet(String releveXmlFileFullName) {
@@ -246,6 +258,17 @@ public class ReleveService implements IReleveService {
 		return jaxbService.jaxbSerialiseObject(releve, Releve.class, rootPath + File.separator + "releves", "releve");
 		
 	}
+
+	@Override
+	public String jaxbSerialiseParam(ReleveParameter releveParam) {
+		
+		return jaxbParamService.jaxbSerialiseObject(releveParam, ReleveParameter.class, rootPathParam, "param");
+
+	}
+	
+	
+	
+	
 
 	
 }

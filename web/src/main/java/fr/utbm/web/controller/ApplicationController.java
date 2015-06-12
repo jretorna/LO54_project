@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.utbm.core.ressource.Releve;
+import fr.utbm.core.ressource.ReleveParameter;
 import fr.utbm.core.ressource.ReleveQueryResult;
 import fr.utbm.core.service.IReleveService;
 import fr.utbm.core.service.IUserService;
@@ -55,9 +56,50 @@ public class ApplicationController {
 		return "releveTest";
 	}
 	
+	/**
+	 * Paramétrage du concentrateur
+	 * @param model
+	 * @return
+	 */
+	
+	@RequestMapping(value="param", method = RequestMethod.POST)
+	public String setParam(@RequestParam("pr_tc_min") String pr_tc_min, 
+							@RequestParam("pr_tc_max") String pr_tc_max, ModelMap model) {
+		
+		ReleveParameter param = new ReleveParameter();
+		
+		param.setTempMin(Integer.parseInt(pr_tc_min));
+		param.setTempMax(Integer.parseInt(pr_tc_max));
+		
+		releveService.jaxbSerialiseParam(param) ;
+		
+		return "index";
+	}
+	
+	@RequestMapping(value="filter", method = RequestMethod.POST)
+	public String showLastRelevesByFiltering(@RequestParam("flt_tc_min") Float flt_tc_min, 
+												@RequestParam("flt_tc_max") Float flt_tc_max,
+												@RequestParam("flt_date_deb") String flt_date_deb, 
+												@RequestParam("flt_date_fin") String flt_date_fin, 
+												@RequestParam("flt_station") String flt_station, 
+												@RequestParam("flt_area") String flt_area,
+												@RequestParam("flt_capteur") String flt_capteur,ModelMap model) {
+		
+		List<ReleveQueryResult> releves = releveService.listReleveByFilter(flt_tc_min, flt_tc_max, 
+																			flt_date_deb, flt_date_fin, 
+																			flt_station, flt_area, 
+																			flt_capteur); 
+		
+		model.addAttribute("message", "Liste des températures collectées Filtrered");
+		model.addAttribute("view", 1);
+		model.addAttribute("releves", releves);
+		
+		return "affichage";
+	}
+	
 	
 	@RequestMapping(value="lastreleves", method = RequestMethod.GET)
-	public String addUser(ModelMap model) {
+	public String showLastReleves(ModelMap model) {
 		
 		/*User user = new User();
 		
@@ -111,6 +153,7 @@ public class ApplicationController {
 		model.addAttribute("releves", releves);
 		
 		return "affichage";
+		
 	}
 	
 	@RequestMapping(value="upreleve", method = RequestMethod.POST)
